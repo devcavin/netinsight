@@ -1,1 +1,1 @@
-# JPA Modelling
+# JPA Domain Modelling
