@@ -18,11 +18,13 @@ extensible format.
 
 ### Get Network IP Information
 
-Returns local interface IPs and public IP.
+Returns local interface IPs that are up and public IP.
 
 **Endpoint**
 
-GET /network/ip
+```sh
+GET api/v1/network/ip
+```
 
 **Response**
 
@@ -39,7 +41,7 @@ GET /network/ip
     }
   },
   "publicIp": {
-    "ipv4": "41.139.167.17"
+    "ipv4": "41.x.x.x"
   },
   "status": "SUCCESS"
 }
