@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: netinsight
-
-  jackson:
-    default-property-inclusion: non_null
