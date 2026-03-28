@@ -1,91 +1,56 @@
 # NetInsight
 
-NetInsight provides simple network insights through a REST API. It
-exposes useful system and network information in a structured and
-extensible format.
+> Network monitoring and insights API built with Java Spring Boot
 
-## Features
+NetInsight provides real-time network visibility through a clean REST API.
+Designed for network engineers who need programmatic access to network
+statistics, bandwidth monitoring, and device discovery.
 
--   Retrieve local network interface IPs
--   Retrieve public IP address
--   Structured JSON responses
--   Container-ready setup
--   Designed for incremental feature additions
+## Why NetInsight?
 
-------------------------------------------------------------------------
+- **Network + Backend**: Built by someone who understands both fiber optics
+  and backend architecture
+- **Java-first**: Unlike Python-based tools, NetInsight runs on the JVM for
+  enterprise reliability
+- **API-first**: Integrate with any dashboard, monitoring system, or automation
+  workflow
+- **Docker-ready**: Deploy anywhere with zero dependencies
 
-## API
+## Use Cases
 
-### Get Network IP Information
+- ISP network monitoring
+- Home network visibility
+- Server bandwidth tracking
+- Automated network diagnostics
+- Integration with existing monitoring stacks
 
-Returns local interface IPs that are up and public IP.
-
-**Endpoint**
-
-```sh
-GET api/v1/network/ip
+## Quick Start
+```bash
+docker compose up
+curl http://localhost:8080/api/v1/network/ip
 ```
-
-**Response**
-
-``` json
-{
-  "localIps": {
-    "wlan0": {
-      "ipv4": "10.10.43.221",
-      "ipv6": "fe80:0:0:0:2b7a:ad03:a5c9:2cfc"
-    },
-    "eth0": {
-      "ipv4": "10.10.100.61",
-      "ipv6": "fe80:0:0:0:f639:9ff:fee2:7339"
-    }
-  },
-  "publicIp": {
-    "ipv4": "41.x.x.x"
-  },
-  "status": "SUCCESS"
-}
-```
-
-------------------------------------------------------------------------
-
-## Project Structure
-
-    src/main/java/.../controller   # REST endpoints
-    src/main/java/.../service      # Core logic
-    src/main/java/.../dto          # Response objects
-    scripts/                       # automation scripts (future)
-
-------------------------------------------------------------------------
-
-## Running
-
-### Using Gradle
-
-``` bash
-./gradlew bootRun
-```
-
-### Using Docker
-
-``` bash
-docker compose up --build
-```
-
-------------------------------------------------------------------------
 
 ## Roadmap
 
--   [x] network IP endpoint
--   [ ] bandwidth monitoring
--   [ ] interface statistics
--   [ ] device discovery
--   [ ] continuous monitoring
--   [ ] streaming metrics
--   [ ] integrations
+- [x] Network IP detection (v0.1)
+- [ ] Interface statistics (v0.2) ← IN PROGRESS
+- [ ] Bandwidth monitoring (v0.3)
+- [ ] Device discovery (v0.4)
+- [ ] Historical data (v0.5)
+- [ ] WebSocket streaming (v0.6)
 
-------------------------------------------------------------------------
+## Tech Stack
+
+- Java 17
+- Spring Boot 3.x
+- Gradle
+- Docker
+- PostgreSQL (planned)
+
+## Author
+
+Built by [Cavin](https://github.com/devcavin) - Network Technician +
+Backend Engineer passionate about infrastructure automation.
 
 ## License
-
-MIT
+[MIT LICENSE](LICENSE)
