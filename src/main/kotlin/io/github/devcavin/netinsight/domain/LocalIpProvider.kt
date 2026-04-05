@@ -12,11 +12,15 @@ class LocalIpProvider {
     fun getLocalIps(): Map<String, IpResponse.IpPair> {
         val result = linkedMapOf<String, IpResponse.IpPair>()
 
-        val interfaces = NetworkInterface.getNetworkInterfaces()
+        val interfaces = NetworkInterface.getNetworkInterfaces() ?: return emptyMap()
 
         while (interfaces.hasMoreElements()) {
             val ni = interfaces.nextElement()
-            if (!ni.isUp || ni.isLoopback) continue
+
+            // 🔹 Improved filtering
+            if (!ni.isUp || ni.isLoopback || ni.isVirtual) continue
+
+            val name = buildInterfaceName(ni)
 
             var ipv4: String? = null
             var ipv6: String? = null
@@ -24,24 +28,39 @@ class LocalIpProvider {
             val addresses = ni.inetAddresses
             while (addresses.hasMoreElements()) {
                 val addr = addresses.nextElement()
+
                 if (addr.isLoopbackAddress) continue
 
                 val ip = addr.hostAddress.substringBefore('%')
 
-                when (addr) {
-                    is Inet4Address -> if (ipv4 == null) ipv4 = ip
-                    is Inet6Address -> if (ipv6 == null) ipv6 = ip
-                    else -> {}
+                if (addr is Inet4Address) {
+                    // Prefer first valid IPv4
+                    if (ipv4 == null) ipv4 = ip
                 }
-
-                if (ipv4 != null && ipv6 != null) break
+                else if (addr is Inet6Address) {
+                    // Prefer non-link-local IPv6 if possible
+                    if (ipv6 == null || addr.isLinkLocalAddress.not()) {
+                        ipv6 = ip
+                    }
+                }
             }
 
             if (ipv4 != null || ipv6 != null) {
-                result[ni.name] = IpResponse.IpPair(ipv4, ipv6)
+                result[name] = IpResponse.IpPair(ipv4, ipv6)
             }
         }
 
         return result
+    }
+
+    private fun buildInterfaceName(ni: NetworkInterface): String {
+        val display = ni.displayName?.trim().orEmpty()
+        val name = ni.name
+
+        return if (display.isNotEmpty() && display != name) {
+            "$display ($name)"
+        } else {
+            name
+        }
     }
 }

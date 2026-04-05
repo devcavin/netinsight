@@ -3,7 +3,7 @@ package io.github.devcavin.netinsight.service
 import io.github.devcavin.netinsight.domain.LocalIpProvider
 import io.github.devcavin.netinsight.domain.PublicIpClient
 import io.github.devcavin.netinsight.dto.response.IpResponse
-import io.github.devcavin.netinsight.enum.IpStatus
+import io.github.devcavin.netinsight.enum.Status
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.net.Inet6Address
@@ -55,7 +55,7 @@ class IpService(
 
         val isOffline = !hasLocalIps && !hasPublicIp
 
-        val status = if (isOffline) IpStatus.ERROR else IpStatus.SUCCESS
+        val status = if (isOffline) Status.ERROR else Status.SUCCESS
 
         val message = if (isOffline) {
             "Failed to retrieve any IP information."
