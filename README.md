@@ -61,7 +61,7 @@ GET /api/v1/network/ip
         }
     },
     "publicIp": {
-        "ipv4": "41.139.167.17",
+        "ipv4": "41.x.x.x",
         "ipv6": "not configured by ISP"
     },
     "status": "SUCCESS",
@@ -78,7 +78,7 @@ GET /api/v1/network/ip
         }
     },
     "publicIp": {
-        "ipv4": "41.139.167.17",
+        "ipv4": "41.x.x.x",
         "ipv6": "not configured by ISP"
     },
     "status": "SUCCESS",
