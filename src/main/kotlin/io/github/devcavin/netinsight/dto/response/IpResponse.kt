@@ -1,12 +1,12 @@
 package io.github.devcavin.netinsight.dto.response
 
-import io.github.devcavin.netinsight.enum.IpStatus
+import io.github.devcavin.netinsight.enum.Status
 
 
 data class IpResponse(
     val localIp: Map<String, IpPair>?,
     val publicIp: IpPair?,
-    val status: IpStatus,
+    val status: Status,
     val message: String?
 ) {
     data class IpPair(
