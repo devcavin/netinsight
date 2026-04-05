@@ -5,4 +5,4 @@
 - Open a PR with a clear description
 - Be open to feedback 🙂
 
-(No strict rules yet—project is evolving!)
+(No strict rules yet project is evolving!)
