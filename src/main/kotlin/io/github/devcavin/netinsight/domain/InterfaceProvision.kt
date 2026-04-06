@@ -19,10 +19,17 @@ class InterfaceProvision( private val localIpProvider: LocalIpProvider) {
     }
 
     fun getActiveInterface(): String? {
-        val activeUp = getActiveLocalIp()
-        val interfaces = localIpProvider.getLocalIps()
+        val activeUp: String? = try {
+            getActiveLocalIp()  // Try to get the active IP normally
+        } catch (e: java.net.SocketTimeoutException) {
+            println("SocketTimeoutException caught: ${e.message}")
+            getFallbackIp()  // If timeout happens, use fallback
+        }
+
+        val interfaces = localIpProvider.getLocalIps() // All local network interfaces
 
         if (activeUp != null) {
+            // Find the interface whose IPv4 or IPv6 matches the active IP
             val match = interfaces.entries.firstOrNull {
                 it.value.ipv4 == activeUp || it.value.ipv6 == activeUp
             }
@@ -31,7 +38,16 @@ class InterfaceProvision( private val localIpProvider: LocalIpProvider) {
             }
         }
 
-        // Fallback heuristic: first interface with IPv4
+        // Fallback heuristic: first interface with IPv4 or IPv6
         return interfaces.entries.firstOrNull { it.value.ipv4 != null || it.value.ipv6 != null }?.key
+    }
+
+    // Fallback function to return a safe IP
+    fun getFallbackIp(): String {
+        return java.net.NetworkInterface.getNetworkInterfaces()
+            .toList()
+            .flatMap { it.inetAddresses.toList() }
+            .firstOrNull { !it.isLoopbackAddress && it is java.net.Inet4Address }
+            ?.hostAddress ?: "127.0.0.1"
     }
 }
