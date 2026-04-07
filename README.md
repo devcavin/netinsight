@@ -20,13 +20,13 @@
 
 Returns all local interface IPs that are up and the public IP address.
 
-**Endpoint**
+*Endpoint*
 
 ```http request
 GET /api/v1/network/ip
 ```
 
-**Response**
+*Response*
 
 **When network interfaces are up**
 
@@ -102,13 +102,13 @@ GET /api/v1/network/ip
 ### Get bandwidth information
 Returns the bandwidth information for the active network interface
 
-**Endpoint**
+*Endpoint*
 
 ```http request
 GET /api/v1/network/bandwidth
 ```
 
-**Response**
+*Response*
 
 **When network interfaces are up**
 ```json
@@ -134,7 +134,71 @@ GET /api/v1/network/bandwidth
     "message": "No active network interface detected"
 }
 ```
+### Get interface statistics
+Returns full snapshot of network interfaces
 
+Later this endpoint will open doors for computing derived metrics like:
+  - packet loss %
+  - error rate
+  - drop rate
+  - utilization %
+  - uptime
+
+*Endpoint*
+
+```http request
+GET /api/v1/network/interfaces
+```
+*Response*
+
+**When at least a single interface is up**
+
+```json
+{
+    "interfaces": {
+        "wlan0": {
+            "name": "wlan0",
+            "status": "UP",
+            "macAddress": "38:BA:F8:70:73:8A",
+            "mtu": 1500,
+            "rxBytes": 206661403,
+            "txBytes": 22447925,
+            "rxPackets": 192381,
+            "txPackets": 61474,
+            "rxErrors": 0,
+            "txErrors": 0,
+            "rxDropped": 567,
+            "txDropped": 12
+        },
+        "eth0": {
+            "name": "eth0",
+            "status": "UP",
+            "macAddress": "F4:39:09:E2:73:39",
+            "mtu": 1500,
+            "rxBytes": 1028221913,
+            "txBytes": 63772580,
+            "rxPackets": 905546,
+            "txPackets": 396908,
+            "rxErrors": 0,
+            "txErrors": 0,
+            "rxDropped": 8137,
+            "txDropped": 23
+        }
+    },
+    "status": "SUCCESS",
+    "message": "Interface Statistics received successfully."
+}
+```
+
+**When interfaces are down**
+
+```json
+{
+    "interfaces": {},
+    "status": "ERROR",
+    "message": "No network interfaces detected."
+}
+```
 
 ---
 
@@ -165,7 +229,7 @@ docker compose up --build
 
 * [x] Network IP endpoint
 * [x] Bandwidth monitoring
-* [ ] Interface statistics
+* [x] Interface statistics
 * [ ] Device discovery
 * [ ] Continuous monitoring
 * [ ] Streaming metrics
@@ -175,13 +239,7 @@ docker compose up --build
 
 ## Contributing
 
-Contributions are welcome! You can:
-
-1. Fork the repo
-2. Create a branch for your feature or adjustments or fix (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -m "Add new feature"`)
-4. Push branch (`git push origin feature/new-feature`)
-5. Open a Pull Request
+Contributions are welcome! You can feel free to check out [CONTRIBUTION](/CONTRIBUTING.md)
 
 ---
 

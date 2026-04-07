@@ -1,4 +1,4 @@
-package io.github.devcavin.netinsight.dto.response
+package io.github.devcavin.netinsight.dto
 
 import io.github.devcavin.netinsight.enum.Status
 

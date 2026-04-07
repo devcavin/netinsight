@@ -2,7 +2,7 @@ package io.github.devcavin.netinsight.service
 
 import io.github.devcavin.netinsight.domain.CounterService
 import io.github.devcavin.netinsight.domain.InterfaceProvision
-import io.github.devcavin.netinsight.dto.response.BandwidthResponse
+import io.github.devcavin.netinsight.dto.BandwidthResponse
 import io.github.devcavin.netinsight.enum.Status
 import org.springframework.stereotype.Service
 
