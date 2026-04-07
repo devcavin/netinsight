@@ -1,6 +1,6 @@
 package io.github.devcavin.netinsight.controller
 
-import io.github.devcavin.netinsight.dto.response.BandwidthResponse
+import io.github.devcavin.netinsight.dto.BandwidthResponse
 import io.github.devcavin.netinsight.service.BandwidthService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

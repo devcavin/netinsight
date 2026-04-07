@@ -1,6 +1,6 @@
 package io.github.devcavin.netinsight.domain
 
-import io.github.devcavin.netinsight.dto.response.IpResponse
+import io.github.devcavin.netinsight.dto.IpResponse
 import org.springframework.stereotype.Component
 import java.net.Inet4Address
 import java.net.Inet6Address

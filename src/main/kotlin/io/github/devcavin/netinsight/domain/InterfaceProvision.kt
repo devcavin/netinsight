@@ -1,12 +1,16 @@
 package io.github.devcavin.netinsight.domain
 
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.net.InetSocketAddress
+import java.net.NetworkInterface
 import java.net.Socket
 import java.net.SocketException
+import java.net.SocketTimeoutException
 
 @Service
 class InterfaceProvision( private val localIpProvider: LocalIpProvider) {
+    private val logger = LoggerFactory.getLogger(InterfaceProvision::class.java)
     fun getActiveLocalIp(): String? {
         return try {
             Socket().use { socket ->
@@ -14,6 +18,7 @@ class InterfaceProvision( private val localIpProvider: LocalIpProvider) {
             socket.localAddress.hostAddress
             }
         } catch (e: SocketException) {
+            logger.info("SocketException caught: ${e.message}")
             null
         }
     }
@@ -21,8 +26,8 @@ class InterfaceProvision( private val localIpProvider: LocalIpProvider) {
     fun getActiveInterface(): String? {
         val activeUp: String? = try {
             getActiveLocalIp()  // Try to get the active IP normally
-        } catch (e: java.net.SocketTimeoutException) {
-            println("SocketTimeoutException caught: ${e.message}")
+        } catch (e: SocketTimeoutException) {
+            logger.info("SocketTimeoutException caught: ${e.message}")
             getFallbackIp()  // If timeout happens, use fallback
         }
 
@@ -44,7 +49,7 @@ class InterfaceProvision( private val localIpProvider: LocalIpProvider) {
 
     // Fallback function to return a safe IP
     fun getFallbackIp(): String {
-        return java.net.NetworkInterface.getNetworkInterfaces()
+        return NetworkInterface.getNetworkInterfaces()
             .toList()
             .flatMap { it.inetAddresses.toList() }
             .firstOrNull { !it.isLoopbackAddress && it is java.net.Inet4Address }

@@ -1,6 +1,6 @@
 package io.github.devcavin.netinsight.controller
 
-import io.github.devcavin.netinsight.dto.response.IpResponse
+import io.github.devcavin.netinsight.dto.IpResponse
 import io.github.devcavin.netinsight.service.IpService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

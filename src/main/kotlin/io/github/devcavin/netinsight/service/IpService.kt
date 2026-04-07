@@ -2,7 +2,7 @@ package io.github.devcavin.netinsight.service
 
 import io.github.devcavin.netinsight.domain.LocalIpProvider
 import io.github.devcavin.netinsight.domain.PublicIpClient
-import io.github.devcavin.netinsight.dto.response.IpResponse
+import io.github.devcavin.netinsight.dto.IpResponse
 import io.github.devcavin.netinsight.enum.Status
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
