@@ -200,6 +200,42 @@ GET /api/v1/network/interfaces
 }
 ```
 
+### Stream live bandwidth metrics
+Streams live bandwidth measurements using Server-Sent Events (SSE)
+
+*Endpoint*
+```http request
+GET /api/v1/network/bandwidth/stream?duration=10&interval=1000
+```
+
+**Query parameters**
+
+| Parameter | Type | Default | Description                       |
+|-----------|------|---------|-----------------------------------|
+| duration  | Long | 5       | Stream duration in seconds        |
+| interval  | Long | 1000    | Emission interval in milliseconds |
+
+*Response*
+
+**When at least an interface is up**
+
+```json
+data:{"timestamp":1778361504668,"interfaceName":"eth0","uploadMbps":6.712708812939024E-4,"downloadMbps":0.0052851661649253295,"status":"SUCCESS"}
+
+data:{"timestamp":1778361505675,"interfaceName":"eth0","uploadMbps":0.002687872763419483,"downloadMbps":0.011180914512922465,"status":"SUCCESS"}
+
+data:{"timestamp":1778361506679,"interfaceName":"eth0","uploadMbps":0.0016398009950248757,"downloadMbps":0.005365174129353234,"status":"SUCCESS"}
+
+data:{"timestamp":1778361507684,"interfaceName":"eth0","uploadMbps":0.002693227091633466,"downloadMbps":0.005466135458167331,"status":"SUCCESS"}
+
+data:{"timestamp":1778361508697,"interfaceName":"eth0","uploadMbps":0.0021523244312561824,"downloadMbps":0.007485657764589516,"status":"SUCCESS"}
+```
+**When interface is down**
+
+```json
+data:{"timestamp":1778361921956,"uploadMbps":0.0,"downloadMbps":0.0,"status":"ERROR"}
+```
+
 ---
 
 ## Project Structure
@@ -230,9 +266,9 @@ docker compose up --build
 * [x] Network IP endpoint
 * [x] Bandwidth monitoring
 * [x] Interface statistics
-* [ ] Device discovery
+* [x] Streaming metrics
 * [ ] Continuous monitoring
-* [ ] Streaming metrics
+* [ ] Device discovery
 * [ ] Integrations
 
 ---
