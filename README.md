@@ -308,6 +308,7 @@ docker compose up --build
 * [x] Bandwidth monitoring
 * [x] Interface statistics
 * [x] Streaming metrics
+* [ ] Latency diagnostics
 * [ ] Continuous monitoring
 * [ ] Device discovery
 * [ ] Integrations
