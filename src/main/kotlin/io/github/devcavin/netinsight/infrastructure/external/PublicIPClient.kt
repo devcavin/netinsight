@@ -1,4 +1,4 @@
-package io.github.devcavin.netinsight.domain
+package io.github.devcavin.netinsight.infrastructure.external
 
 import io.github.devcavin.netinsight.config.IpApiProperties
 import org.slf4j.LoggerFactory

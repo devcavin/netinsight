@@ -1,7 +1,8 @@
-package io.github.devcavin.netinsight.domain
+package io.github.devcavin.netinsight.infrastructure.os
 
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import java.net.Inet4Address
 import java.net.InetSocketAddress
 import java.net.NetworkInterface
 import java.net.Socket
@@ -52,7 +53,7 @@ class InterfaceProvision( private val localIpProvider: LocalIpProvider) {
         return NetworkInterface.getNetworkInterfaces()
             .toList()
             .flatMap { it.inetAddresses.toList() }
-            .firstOrNull { !it.isLoopbackAddress && it is java.net.Inet4Address }
+            .firstOrNull { !it.isLoopbackAddress && it is Inet4Address }
             ?.hostAddress ?: "127.0.0.1"
     }
 }

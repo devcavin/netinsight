@@ -1,7 +1,7 @@
 package io.github.devcavin.netinsight.service
 
-import io.github.devcavin.netinsight.domain.CounterService
-import io.github.devcavin.netinsight.domain.LocalIpProvider
+import io.github.devcavin.netinsight.infrastructure.os.CounterService
+import io.github.devcavin.netinsight.infrastructure.os.LocalIpProvider
 import io.github.devcavin.netinsight.dto.InterfaceMeta
 import io.github.devcavin.netinsight.dto.InterfaceResponse
 import io.github.devcavin.netinsight.dto.InterfaceStats

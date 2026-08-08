@@ -277,12 +277,84 @@ data:
   }
 ```
 
+### Latency Diagnostics
+Troubleshoot a network to find out where the actual issue is by measuring its latency
+
+*Endpoint*
+```http request
+GET /api/v1/network/latency
+```
+*Response*
+
+**When network interfaces are up**
+
+```json
+{
+  "interfaceName": "enp1s0",
+  "gatewayLatencyMs": 1,
+  "internetLatencyMs": 10,
+  "status": "SUCCESS",
+  "message": "Latency diagnostics completed successfully"
+}
+```
+
+**When interface is down**
+```json
+{
+  "status": "ERROR",
+  "message": "No active network interface detected"
+}
+```
+
 ---
 
 ## Project Structure
 
-*Coming soon…*
-(Currently, the project is structured to support Gradle or Docker workflows.)
+netinsight
+│
+├── config/
+│
+├── controller/
+│   ├── rest/
+│   ├── stream/
+│
+├── core/
+│   ├── model/
+│   │   InterfaceSnapshot
+│   │   InterfaceMetrics
+│   │   BandwidthMetrics
+│   │
+│   ├── engine/
+│   │   MetricsEngine
+│   │   CorrelationEngine
+│   │
+│   ├── collector/
+│   │   CounterCollector
+│   │   InterfaceCollector
+│
+├── service/
+│   ├── BandwidthService
+│   ├── LatencyService
+│   ├── InterfaceService
+│   ├── StreamingService
+│
+├── infrastructure/
+│   ├── os/
+│   │   LocalIpProvider
+│   │   InterfaceProvision
+│   │   CounterService   (low-level only)
+│   │
+│   ├── external/
+│   │   PublicIpClient
+│
+├── dto/
+│   ├── request/
+│   ├── response/
+│   ├── stream/
+│
+├── enum/
+│
+└── NetInsightApplication.kt
 
 ---
 
@@ -308,7 +380,7 @@ docker compose up --build
 * [x] Bandwidth monitoring
 * [x] Interface statistics
 * [x] Streaming metrics
-* [ ] Latency diagnostics
+* [x] Latency diagnostics
 * [ ] Continuous monitoring
 * [ ] Device discovery
 * [ ] Integrations

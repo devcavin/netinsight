@@ -1,4 +1,4 @@
-package io.github.devcavin.netinsight.domain
+package io.github.devcavin.netinsight.infrastructure.os
 
 import io.github.devcavin.netinsight.dto.InterfaceCounters
 import org.slf4j.LoggerFactory

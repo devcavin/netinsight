@@ -1,7 +1,7 @@
 package io.github.devcavin.netinsight.service
 
-import io.github.devcavin.netinsight.domain.LocalIpProvider
-import io.github.devcavin.netinsight.domain.PublicIpClient
+import io.github.devcavin.netinsight.infrastructure.os.LocalIpProvider
+import io.github.devcavin.netinsight.infrastructure.external.PublicIpClient
 import io.github.devcavin.netinsight.dto.IpResponse
 import io.github.devcavin.netinsight.enum.Status
 import org.slf4j.LoggerFactory

@@ -1,4 +1,4 @@
-package io.github.devcavin.netinsight.domain
+package io.github.devcavin.netinsight.infrastructure.os
 
 import io.github.devcavin.netinsight.dto.IpResponse
 import org.springframework.stereotype.Component
