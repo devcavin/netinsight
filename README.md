@@ -309,7 +309,7 @@ GET /api/v1/network/latency
 ---
 
 ## Project Structure
-
+```
 netinsight
 │
 ├── config/
@@ -355,6 +355,7 @@ netinsight
 ├── enum/
 │
 └── NetInsightApplication.kt
+```
 
 ---
 
